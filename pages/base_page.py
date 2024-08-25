@@ -1,7 +1,9 @@
+from selenium.common import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
+
 from helpers.assertions import Assertions
 
 
@@ -29,8 +31,22 @@ class BasePage:
         ).send_keys(text)
 
     def get_element(self, selector):
-        return WebDriverWait(self.driver, 20).until(
+        return WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(selector))
+
+    def wait_until_element_disappears(self, selector):
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element_located(selector)
+        )
+
+    def wait_for(self, selector, time_out=10):
+        try:
+            element = WebDriverWait(self.driver, time_out).until(
+                EC.visibility_of_element_located(selector)
+            )
+            return element
+        except (NoSuchElementException, TimeoutException):
+            assert False, f"Element {selector} does not find"
 
     def scroll_up_the_page(self):
         self.driver.execute_script("window.scrollTo(0, 0)")
