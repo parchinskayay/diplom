@@ -15,13 +15,18 @@ class HeadersLocators:
     FIRST_PRODUCT = (By.XPATH, '//div[@data-testid="image-container"][1]')
     BUTTON_FIRST_PRODUCT_ADD_TO_BASKET = (By.XPATH, '//*[@class="Button-module__buttonText"][1]')
 
-    BONUS_PROGRAM = (By.XPATH, '//li[@class="styles_navMenuItem__5EPNe"]')
-    SEARCH = (By.XPATH, '//input[@aria-label ="search"]')
-    CATALOG_BUTTON = (By.XPATH, '//button[@class="styles_catalogButton__z9L_j"]')
-    ACCOUNT = (By.XPATH, '//input[@class="styles_userToolsToggler__c2aHe"]')
-    CITY = (By.CSS_SELECTOR, '[class="styles_localityBtn__qrGFQ"]')
-    CONTACTS_BUTTON = (By.XPATH, '//button[@class="styles_headerTitle__OyXGt styles_active__2Ygqn"]')
-    WORKING_TIME = (By.CSS_SELECTOR, '[class="styles_workingTimeText__2h7JO"]')
-    ALL_SALES = (By.CSS_SELECTOR, '[class="styles_fixed__RU8zI"]')
+    BUTTON_BONUS_PROGRAM = (By.XPATH, '//a[@href="/special_offers/bonus.html"][1]')
+    BANNER_BONUS_PROGRAM = (By.XPATH, '//img[@src="https://cdn21vek.by/img/tmp/656dc06b98ae0.jpeg"]')
 
-    BASKET = (By.CSS_SELECTOR, '[class="headerCartBox"]')
+    SEARCH_FIELD = (By.CSS_SELECTOR, '[class="Search_searchInput__RoV1W"]')
+    SEARCH_RESULT = (By.CSS_SELECTOR, '[class="content__header cr-category_header"]')
+
+    BUTTON_PAYMENT_IN_PARTS = (By.XPATH, '//a[@href="/special_offers/partly_pay.html"][1]')
+    MONTHLY_PAYMENT = (By.CSS_SELECTOR, '[class="Calculator_priceBlock__3r472 Calculator_monthlyPayment__tfMOF"]')
+
+    CITY = (By.CSS_SELECTOR, '[class="styles_localityBtn__qrGFQ"]')
+    BUTTON_CHANGE_THE_CITY = (By.XPATH, '//button[@class="styles_localityBtn__qrGFQ"]')
+    FIELD_WITH_LOCATION = (By.XPATH, '//input[@class="select__input"]')
+    BUTTON_CLEAR_FIELD_WITH_LOCATION = (By.CSS_SELECTOR, '[class="BaseSuggest-module__clearIndicator"]')
+    BUTTON_SAVE_NEW_CITY = (By.XPATH, '//button[@class="Button-module__button '
+                                      'style_baseActionButtonMargin__4haYC Button-module__blue-primary"]')
