@@ -68,3 +68,66 @@ def test_change_city(driver):
     main_page.open()
     main_page.click_agree_cookies()
     main_page.change_city()
+
+
+def test_favorites_is_empty(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.favorites_is_empty()
+
+
+def test_favorites_is_not_empty(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.favorites_is_not_empty()
+
+
+def test_basket_is_empty(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.basket_is_empty()
+
+
+def test_basket_is_not_empty(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.basket_is_not_empty()
+
+
+def test_favorites_are_working(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.favorites_are_working()
+
+
+def test_delete_from_favorites(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.delete_from_favorites()
+
+
+def test_check_sale_filter(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.check_sale_filter()
+
+
+def test_assert_show_more_button(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.assert_show_more_button()
+
+
+def test_check_popular_filter_cheap(driver):
+    main_page = MainPage(driver)
+    main_page.open()
+    main_page.click_agree_cookies()
+    main_page.check_popular_filter_cheap()

@@ -1,11 +1,11 @@
 import time
 
 from helpers.url import BASE_URL
-from locators.headers_locators import HeadersLocators
+from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 
 
-class MainPage(BasePage, HeadersLocators):
+class MainPage(BasePage, MainPageLocators):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -76,3 +76,63 @@ class MainPage(BasePage, HeadersLocators):
         self.click(self.BUTTON_SAVE_NEW_CITY)
         time.sleep(2)
         self.assertions.assert_that_text_is_the_same(self.CITY, 'г. Брест')
+
+    def favorites_is_empty(self):
+        self.click(self.BUTTON_FAVORITES_EMPTY)
+        self.assertions.assert_that_element_doesnt_exist(self.BUTTON_DELETE_FROM_FAVORITES)
+
+    def favorites_is_not_empty(self):
+        self.click(self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
+        self.click(self.BUTTON_FAVORITES)
+        self.assertions.assert_that_element_is_visible(self.BUTTON_DELETE_FROM_FAVORITES)
+
+    def basket_is_empty(self):
+        self.click(self.BUTTON_BASKET_ON_MAIN_PAGE)
+        self.assertions.assert_that_element_is_visible(self.INFORMATION_THAT_BASKET_IS_EMPTY)
+
+    def basket_is_not_empty(self):
+        self.click(self.BUTTON_FIRST_PRODUCT_ADD_TO_BASKET)
+        self.click(self.BUTTON_BASKET_ON_MAIN_PAGE)
+        time.sleep(2)
+        self.assertions.assert_that_element_doesnt_exist(self.INFORMATION_THAT_BASKET_IS_EMPTY)
+
+    def favorites_are_working(self):
+        recommendation = self.get_element(self.REC)
+        first_el = recommendation.find_element(*self.FIRST_FIELD_OF_REC)
+        first_el_text_el = first_el.find_element(*self.FIRST_FIELD_OF_REC_TEXT)
+        first_el_text = self.get_inner_text(first_el_text_el)
+        first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
+        first_el_button_favorites.click()
+        self.click(self.BUTTON_FAVORITES)
+        fav_first_el = self.get_element(self.FAVORITES_FIRST_EL)
+        fav_first_el_text = fav_first_el.find_element(*self.FAVORITES_FIRST_EL_TEXT).text
+        assert first_el_text == fav_first_el_text
+
+    def delete_from_favorites(self):
+        recommendation = self.get_element(self.REC)
+        first_el = recommendation.find_element(*self.FIRST_FIELD_OF_REC)
+        first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
+        first_el_button_favorites.click()
+        self.click(self.BUTTON_FAVORITES)
+        self.click(self.BUTTON_DELETE_FROM_FAVORITES)
+        self.assertions.assert_that_element_doesnt_exist(self.FAVORITES_FIRST_EL)
+
+    def check_sale_filter(self):
+        self.click(self.ALL_PROMOTIONS)
+        self.click(self.SALE_50)
+        time.sleep(2)
+        sale = self.get_text(self.SALE_FIRST_GOOD)
+        assert float(sale[1:-1]) >= 50
+
+    def assert_show_more_button(self):
+        count_popular_els_old = len(self.driver.find_elements(*self.POPULAR_ELEMENT))
+        self.click(self.BUTTON_SHOW_MORE)
+        count_popular_els_new = len(self.driver.find_elements(*self.POPULAR_ELEMENT))
+        assert count_popular_els_old < count_popular_els_new
+
+    def check_popular_filter_cheap(self):
+        self.click(self.BUTTON_CHEAPER_THAN_HUNDRED)
+        time.sleep(2)
+        first_el = self.get_element(self.POPULAR_ELEMENT)
+        first_el_price = first_el.find_element(*self.ELEMENT_PRICE).text
+        assert float(first_el_price.replace(',', '.')[:-3]) <= 100

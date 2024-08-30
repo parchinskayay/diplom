@@ -15,9 +15,6 @@ class BasePage:
     def open_page(self, url):
         self.driver.get(url)
 
-    def open_page_basket(self, selector):
-        self.driver.get(self, *selector)
-
     def click(self, selector):
         WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable(selector)
@@ -58,3 +55,12 @@ class BasePage:
 
     def save_screenshot(self, name):
         self.driver.save_screenshot(name)
+
+    def get_inner_text(self, el):
+        return el.get_attribute("innerText")
+
+    def get_text(self, selector):
+        return self.get_element(selector).text
+
+    def check_element_is_exist(self, selector):
+        return self.driver.find_elements(*selector)
