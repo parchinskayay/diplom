@@ -26,7 +26,7 @@ class MainPageLocators:
 
     CITY = (By.CSS_SELECTOR, '[class="styles_localityBtn__qrGFQ"]')
     BUTTON_CHANGE_THE_CITY = (By.XPATH, '//button[@class="styles_localityBtn__qrGFQ"]')
-    FIELD_WITH_LOCATION = (By.XPATH, '//input[@class="select__input"]')
+    FIELD_WITH_LOCATION = (By.CSS_SELECTOR, '[class="select__input"]')
     BUTTON_CLEAR_FIELD_WITH_LOCATION = (By.CSS_SELECTOR, '[class="BaseSuggest-module__clearIndicator"]')
     BUTTON_SAVE_NEW_CITY = (By.XPATH, '//button[@class="Button-module__button '
                                       'style_baseActionButtonMargin__4haYC Button-module__blue-primary"]')

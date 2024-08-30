@@ -26,7 +26,12 @@ class AccountPage(BasePage, AccountPageLocators):
         self.fill(self.FIELD_EMAIL, 'example@example.com')
         self.fill(self.FIELD_PASSW, '12345')
         self.click(self.BUTTON_SUBMIT)
-        self.assertions.assert_that_element_is_visible(self.INCORRECT_PASSW)
+        if self.check_element_is_exist(self.INCORRECT_PASSW):
+            self.assertions.assert_that_element_is_visible(self.INCORRECT_PASSW)
+        else:
+            self.assertions.assert_that_element_is_visible(self.INCORRECT_PASSW2)
+
+
 
     def field_email_is_empty(self):
         self.open_account_field()

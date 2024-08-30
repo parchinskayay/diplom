@@ -58,6 +58,7 @@ class MainPage(BasePage, MainPageLocators):
         self.assertions.assert_that_element_is_visible(self.SEARCH_FIELD)
         self.fill(self.SEARCH_FIELD, 'наушники')
         self.click_enter(self.SEARCH_FIELD)
+        time.sleep(2)
         self.assertions.assert_that_element_is_visible(self.SEARCH_RESULT)
 
     def button_payment_in_parts_is_working(self):
@@ -68,11 +69,12 @@ class MainPage(BasePage, MainPageLocators):
     def change_city(self):
         self.assertions.assert_that_element_is_visible(self.CITY)
         self.click(self.BUTTON_CHANGE_THE_CITY)
+        time.sleep(5)
         self.click(self.BUTTON_CLEAR_FIELD_WITH_LOCATION)
+        time.sleep(2)
         self.fill(self.FIELD_WITH_LOCATION, 'г. Брест')
-        time.sleep(2)
+        time.sleep(5)
         self.click_enter(self.FIELD_WITH_LOCATION)
-        time.sleep(2)
         self.click(self.BUTTON_SAVE_NEW_CITY)
         time.sleep(2)
         self.assertions.assert_that_text_is_the_same(self.CITY, 'г. Брест')

@@ -14,7 +14,8 @@ class AccountPageLocators:
     BUTTON_SEND = (By.XPATH, '//button[@class="Button-module__button Button-module__blue-primary"]')
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, '[class="SuccessScreen_successMessageWrapper___Hk_F"]')
 
-    INCORRECT_PASSW = (By.CSS_SELECTOR, '[class="ErrorMessage-module__message"] [class="styles_errorText__LEN7M"]')
+    INCORRECT_PASSW = (By.CSS_SELECTOR, '[class="styles_errorText__LEN7M"]')
+    INCORRECT_PASSW2 = (By.CSS_SELECTOR, '[class="ErrorMessageLink_container__7D0yM"]')
     BUTTON_RESET_PASSW = (By.CSS_SELECTOR, '[class="styles_errorText__LEN7M"] [class="Button-module__buttonText"]')
     BUTTON_FORGOT_PASSW = (By.XPATH, '//button[contains(text(),"Забыли пароль")]')
     BUTTON_SUBMIT = (By.CSS_SELECTOR, '[data-testid="loginSubmit"]')

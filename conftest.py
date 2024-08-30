@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def driver():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.implicitly_wait(5)
+    driver.maximize_window()
     yield driver
 
     driver.close()
