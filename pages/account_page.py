@@ -15,7 +15,7 @@ class AccountPage(BasePage, AccountPageLocators):
     def incorrect_email(self):
         self.open_account_field()
         self.wait_for(self.FIELD_EMAIL)
-        self.fill(self.FIELD_EMAIL, 'example@gl.ru')
+        self.fill(self.FIELD_EMAIL, 'example@1111')
         self.fill(self.FIELD_PASSW, '12345')
         self.click(self.BUTTON_SUBMIT)
         self.assertions.assert_that_element_is_visible(self.CHECK_EMAIL)
@@ -37,13 +37,19 @@ class AccountPage(BasePage, AccountPageLocators):
         self.open_account_field()
         self.fill(self.FIELD_PASSW, '12345')
         self.click(self.BUTTON_SUBMIT)
-        self.assertions.assert_that_element_is_visible(self.EMAIL_FIELD_EMPTY)
+        if self.check_element_is_exist(self.EMAIL_FIELD_EMPTY):
+            self.assertions.assert_that_element_is_visible(self.EMAIL_FIELD_EMPTY)
+        else:
+            self.assertions.assert_that_element_is_visible(self.EMAIL_FIELD_EMPTY2)
 
     def field_passw_is_empty(self):
         self.open_account_field()
         self.fill(self.FIELD_EMAIL, 'example@example.com')
         self.click(self.BUTTON_SUBMIT)
-        self.assertions.assert_that_element_is_visible(self.PASSW_FIELD_EMPTY)
+        if self.check_element_is_exist(self.PASSW_FIELD_EMPTY):
+            self.assertions.assert_that_element_is_visible(self.PASSW_FIELD_EMPTY)
+        else:
+            self.assertions.assert_that_element_is_visible(self.PASSW_FIELD_EMPTY2)
 
     def forgot_passw(self):
         self.open_account_field()
@@ -72,3 +78,5 @@ class AccountPage(BasePage, AccountPageLocators):
             self.assertions.assert_that_element_is_visible(self.FIELD_CHECK_EMAIL_OR_LOGIN)
         else:
             self.assertions.assert_that_element_is_visible(self.FIELD_CHECK_EMAIL_OR_LOGIN2)
+
+

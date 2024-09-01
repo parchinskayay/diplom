@@ -57,3 +57,14 @@ class MainPageLocators:
 
     BUTTON_CHEAPER_THAN_HUNDRED = (By.XPATH, '//span[text()="до 100 р."]')
     ELEMENT_PRICE = (By.CSS_SELECTOR, '[class="CardPrice_currentPrice__EU_7r ProductHome_priceCurrent__JHKhd"]')
+
+    WRITE_TO_US = (By.CSS_SELECTOR, '[class="Contacts_contactsBlockItem__Q_Lbt Contacts_feedback__eiVnQ"]')
+    FEEDBACK_WINDOW = (By.CSS_SELECTOR, '[class="Form-module__formTitle"]')
+
+    INPUT_EMAIL = (By.CSS_SELECTOR, '[class="style_inputStyle__ZKhdf"]')
+    BUTTON_INPUT_EMAIL = (By.CSS_SELECTOR, '[class="SubscriptionForm_formWrapper__GiJED"] [class="SvgIcon-module__base"]')
+    INPUT_ERROR_MESSAGE = (By.CSS_SELECTOR, '[class="input-error-message__message"]')
+    LOGIN_TO_ACCOUNT = (By.CSS_SELECTOR, '[class="Form-module__formTitle"]')
+    LOGIN_TO_ACCOUNT2 = (By.CSS_SELECTOR, '[class^="LoginFormNew_title__0zk9Q Text-module__text Text-module__large"]')
+
+    BUTTON_UP = (By.CSS_SELECTOR, '[class="style_upButton__MUSza style_show__BRLkA"]')

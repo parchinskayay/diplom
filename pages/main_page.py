@@ -1,5 +1,4 @@
 import time
-
 from helpers.url import BASE_URL
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
@@ -58,7 +57,7 @@ class MainPage(BasePage, MainPageLocators):
         self.assertions.assert_that_element_is_visible(self.SEARCH_FIELD)
         self.fill(self.SEARCH_FIELD, 'наушники')
         self.click_enter(self.SEARCH_FIELD)
-        time.sleep(2)
+        time.sleep(5)
         self.assertions.assert_that_element_is_visible(self.SEARCH_RESULT)
 
     def button_payment_in_parts_is_working(self):
@@ -116,6 +115,7 @@ class MainPage(BasePage, MainPageLocators):
         first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
         first_el_button_favorites.click()
         self.click(self.BUTTON_FAVORITES)
+        # self.wait_for(self.BUTTON_DELETE_FROM_FAVORITES)
         self.click(self.BUTTON_DELETE_FROM_FAVORITES)
         self.assertions.assert_that_element_doesnt_exist(self.FAVORITES_FIRST_EL)
 
@@ -138,3 +138,36 @@ class MainPage(BasePage, MainPageLocators):
         first_el = self.get_element(self.POPULAR_ELEMENT)
         first_el_price = first_el.find_element(*self.ELEMENT_PRICE).text
         assert float(first_el_price.replace(',', '.')[:-3]) <= 100
+
+    def check_write_to_us_button(self):
+        self.wait_for(self.WRITE_TO_US)
+        self.click(self.WRITE_TO_US)
+        self.wait_for(self.FEEDBACK_WINDOW)
+        self.assertions.assert_that_text_is_the_same(self.FEEDBACK_WINDOW, 'Обратная связь')
+
+    def check_subscription_form_empty(self):
+        self.wait_for(self.INPUT_EMAIL)
+        self.click(self.BUTTON_INPUT_EMAIL)
+        self.assertions.assert_that_text_is_the_same(self.INPUT_ERROR_MESSAGE, 'Электронная почта не указана')
+
+    def check_subscription_form_incorrect_email(self):
+        self.wait_for(self.INPUT_EMAIL)
+        self.fill(self.INPUT_EMAIL, '1111')
+        self.click(self.BUTTON_INPUT_EMAIL)
+        self.assertions.assert_that_text_is_the_same(self.INPUT_ERROR_MESSAGE, 'Неправильный формат электронной почты')
+
+    def check_subscription_form_work_correct(self):
+        self.wait_for(self.INPUT_EMAIL)
+        self.fill(self.INPUT_EMAIL, 'example@example.com')
+        self.click(self.BUTTON_INPUT_EMAIL)
+        time.sleep(2)
+        if self.check_element_is_exist(self.LOGIN_TO_ACCOUNT):
+            self.assertions.assert_that_text_is_the_same(self.LOGIN_TO_ACCOUNT, 'Вход')
+        else:
+            self.assertions.assert_that_text_is_the_same(self.LOGIN_TO_ACCOUNT2, 'Вход')
+
+    def check_button_up(self):
+        self.scroll_to_bottom()
+        self.click(self.BUTTON_UP)
+        time.sleep(2)
+        assert self.get_window_position() == 0
