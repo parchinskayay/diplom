@@ -2,18 +2,18 @@ from pages.account_page import AccountPage
 from test_main_page import init_main_page
 
 
-def test_incorrect_email(driver):
+def test_check_incorrect_email(driver):
     init_main_page(driver)
 
     account_page = AccountPage(driver)
-    account_page.incorrect_email()
+    account_page.check_incorrect_email()
 
 
-def test_incorrect_password(driver):
+def test_check_incorrect_password(driver):
     init_main_page(driver)
 
     account_page = AccountPage(driver)
-    account_page.incorrect_password()
+    account_page.check_incorrect_password()
 
 
 def test_field_email_is_empty(driver):
@@ -37,11 +37,11 @@ def test_forgot_passw(driver):
     account_page.forgot_passw()
 
 
-def test_reset_password(driver):
+def test_check_button_reset_password(driver):
     init_main_page(driver)
 
     account_page = AccountPage(driver)
-    account_page.reset_password()
+    account_page.check_button_reset_password()
 
 
 def test_check_that_user_is_already_exist(driver):

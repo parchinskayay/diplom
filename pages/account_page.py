@@ -12,7 +12,7 @@ class AccountPage(BasePage, AccountPageLocators):
         self.click(self.BUTTON_ACCOUNT)
         self.click(self.BUTTON_ENTER)
 
-    def incorrect_email(self):
+    def check_incorrect_email(self):
         self.open_account_field()
         self.wait_for(self.FIELD_EMAIL)
         self.fill(self.FIELD_EMAIL, 'example@1111')
@@ -20,7 +20,7 @@ class AccountPage(BasePage, AccountPageLocators):
         self.click(self.BUTTON_SUBMIT)
         self.assertions.assert_that_element_is_visible(self.CHECK_EMAIL)
 
-    def incorrect_password(self):
+    def check_incorrect_password(self):
         self.open_account_field()
         self.wait_for(self.FIELD_EMAIL)
         self.fill(self.FIELD_EMAIL, 'example@example.com')
@@ -59,10 +59,14 @@ class AccountPage(BasePage, AccountPageLocators):
         self.wait_for(self.SUCCESS_MESSAGE)
         self.assertions.assert_that_element_is_visible(self.SUCCESS_MESSAGE)
 
-    def reset_password(self):
-        self.incorrect_password()
+    def check_button_reset_password(self):
+        self.open_account_field()
+        self.wait_for(self.FIELD_EMAIL)
+        self.fill(self.FIELD_EMAIL, 'example@example.com')
+        self.fill(self.FIELD_PASSW, '12345')
         self.click(self.BUTTON_SUBMIT)
-        self.assertions.assert_that_element_is_clickable(self.BUTTON_RESET_PASSW)
+        self.click(self.BUTTON_RESET_PASSW)
+        self.assertions.assert_that_element_is_visible(self.FIELD_RESET_PASSW_EMAIL)
 
     def check_that_user_is_already_exist(self):
         self.open_account_field()

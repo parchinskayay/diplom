@@ -115,7 +115,7 @@ class MainPage(BasePage, MainPageLocators):
         first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
         first_el_button_favorites.click()
         self.click(self.BUTTON_FAVORITES)
-        # self.wait_for(self.BUTTON_DELETE_FROM_FAVORITES)
+        self.wait_for(self.BUTTON_DELETE_FROM_FAVORITES)
         self.click(self.BUTTON_DELETE_FROM_FAVORITES)
         self.assertions.assert_that_element_doesnt_exist(self.FAVORITES_FIRST_EL)
 
