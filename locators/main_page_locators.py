@@ -3,7 +3,13 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators:
     COOKIE_WINDOW = (By.CSS_SELECTOR, '[class="AgreementCookie_modal__x3nra"]')
-    BUTTON_AGREE_COOKIES = (By.CSS_SELECTOR, '[class="Button-module__button Button-module__blue-primary"]')
+    BUTTON_REJECT_COOKIES = (By.CSS_SELECTOR, '[class="Button-module__button '
+                                              'AgreementCookie_reject__f5oqP '
+                                              'Button-module__gray-secondary"]')
+    BUTTON_AGREE_COOKIES = (By.CSS_SELECTOR, '[class="Button-module__button '
+                                             'Button-module__blue-primary"]')
+    BUTTON_REJECT_COOKIES_SECOND = (By.CSS_SELECTOR, '[class="Button-module__button '
+                                                     'Button-module__gray-secondary"]')
 
     DROPDOWN_WINDOW = (By.CSS_SELECTOR, '[class="popmechanic-content"]')
     BUTTON_CLOSE_DROPDOWN_WINDOW = (By.CSS_SELECTOR, '[class="popmechanic-submit popmechanic-submit-close"]')
@@ -12,8 +18,8 @@ class MainPageLocators:
     LOGO = (By.XPATH, '//a[@class="logotypeImg"]')
     CONTACT_CENTER_OPENING_HOURS = (By.CSS_SELECTOR, '[class="styles_workingTimeText__2h7JO"]')
 
-    FIRST_PRODUCT = (By.XPATH, '//div[@data-testid="image-container"][1]')
-    BUTTON_FIRST_PRODUCT_ADD_TO_BASKET = (By.XPATH, '//*[@class="Button-module__buttonText"][1]')
+    BUTTON_ADD_TO_BASKET_PRODUCT_TEXT = (By.CSS_SELECTOR, '[class$="RecommendationProduct_info__fmq8N"]')
+    BUTTON_ADD_TO_BASKET = (By.CSS_SELECTOR, '[aria-label="Добавить в корзину"]')
 
     BUTTON_BONUS_PROGRAM = (By.XPATH, '//a[@href="/special_offers/bonus.html"][1]')
     BANNER_BONUS_PROGRAM = (By.XPATH, '//img[@src="https://cdn21vek.by/img/tmp/656dc06b98ae0.jpeg"]')
@@ -22,7 +28,7 @@ class MainPageLocators:
     SEARCH_RESULT = (By.CSS_SELECTOR, '[class="content__header cr-category_header"]')
 
     BUTTON_PAYMENT_IN_PARTS = (By.XPATH, '//a[@href="/special_offers/partly_pay.html"][1]')
-    MONTHLY_PAYMENT = (By.CSS_SELECTOR, '[class="Calculator_priceBlock__3r472 Calculator_monthlyPayment__tfMOF"]')
+    PAYMENT_IN_PARTS_BANNER = (By.XPATH, '//h1[@class="PartlyPay_header__ZVk0i"]')
 
     CITY = (By.CSS_SELECTOR, '[class="styles_localityBtn__qrGFQ"]')
     BUTTON_CHANGE_THE_CITY = (By.XPATH, '//button[@class="styles_localityBtn__qrGFQ"]')
@@ -31,24 +37,9 @@ class MainPageLocators:
     BUTTON_SAVE_NEW_CITY = (By.XPATH, '//button[@class="Button-module__button '
                                       'style_baseActionButtonMargin__4haYC Button-module__blue-primary"]')
 
-    BUTTON_FAVORITES_EMPTY = (By.CSS_SELECTOR, '[class="headerFavoritesBox headerCartBoxEmpty"]')
-    BUTTON_FAVORITES = (By.CSS_SELECTOR, '[class="headerFavoritesBox"]')
-    BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES = (By.XPATH, '//button[@aria-label="Добавить в избранное"][1]')
-
-    REC = (By.CSS_SELECTOR, '[class="Recommendations_container__SX7F8"]')
-    FIRST_FIELD_OF_REC = (By.XPATH, '//*[@data-testid="card"][1]')
-    FIRST_FIELD_OF_REC_TEXT = (By.CSS_SELECTOR, '[class="CardInfo_info__cUeVj RecommendationProduct_info__fmq8N"]')
-    FIRST_FIELD_OF_REC_BUTTON = (By.CSS_SELECTOR, '[class^="CardContainer_root__ziQTh"][1]')
-    FAVORITES_FIRST_EL = (By.CSS_SELECTOR, '[class="OldProductCard_wrapper__rPxyQ"]')
-    FAVORITES_FIRST_EL_TEXT = (By.CSS_SELECTOR, '[class="OldProductCard_name__q8eRK"]')
-
-    BUTTON_DELETE_FROM_FAVORITES = (By.CSS_SELECTOR, '[class="OldProductCard_removeBtn__Comnc"]')
-
-    BUTTON_BASKET_ON_MAIN_PAGE = (By.XPATH, '//*[@href="/order/?&checkTab=true"]')
-    INFORMATION_THAT_BASKET_IS_EMPTY = (By.CSS_SELECTOR, '[class^="EmptyBasket_title__fTZV_"]')
+    BUTTON_ADD_PRODUCT_TO_FAVORITES = (By.CSS_SELECTOR, '[data-testid="card-favorites"]')
 
     ALL_PROMOTIONS = (By.CSS_SELECTOR, '[class="styles_promoItem__aolWq"]')
-    SALE_50 = (By.XPATH, '//*[text()="от 50%"]')
     SALE_FIRST_GOOD = (By.XPATH, '//*[@class="style_promoDiscount___y27J"][1]')
 
     BUTTON_SHOW_MORE = (By.CSS_SELECTOR, '[class="Button-module__button '
@@ -62,7 +53,8 @@ class MainPageLocators:
     FEEDBACK_WINDOW = (By.CSS_SELECTOR, '[class="Form-module__formTitle"]')
 
     INPUT_EMAIL = (By.CSS_SELECTOR, '[class="style_inputStyle__ZKhdf"]')
-    BUTTON_INPUT_EMAIL = (By.CSS_SELECTOR, '[class="SubscriptionForm_formWrapper__GiJED"] [class="SvgIcon-module__base"]')
+    BUTTON_INPUT_EMAIL = (
+    By.CSS_SELECTOR, '[class="SubscriptionForm_formWrapper__GiJED"] [class="SvgIcon-module__base"]')
     INPUT_ERROR_MESSAGE = (By.CSS_SELECTOR, '[class="input-error-message__message"]')
     LOGIN_TO_ACCOUNT = (By.CSS_SELECTOR, '[class="Form-module__formTitle"]')
     LOGIN_TO_ACCOUNT2 = (By.CSS_SELECTOR, '[class^="LoginFormNew_title__0zk9Q Text-module__text Text-module__large"]')

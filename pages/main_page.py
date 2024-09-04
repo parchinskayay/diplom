@@ -1,7 +1,9 @@
 import time
 from helpers.url import BASE_URL
 from locators.main_page_locators import MainPageLocators
+from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+import allure
 
 
 class MainPage(BasePage, MainPageLocators):
@@ -10,162 +12,200 @@ class MainPage(BasePage, MainPageLocators):
         super().__init__(driver)
         self.driver = driver
 
+    @allure.step('Open main page')
     def open(self):
         self.open_page(BASE_URL)
 
-    def assert_agree_cookies(self):
-        self.assertions.assert_that_element_is_visible(self.COOKIE_WINDOW)
-        self.click(self.BUTTON_AGREE_COOKIES)
-        self.wait_until_element_disappear(self.COOKIE_WINDOW)
-        self.assertions.assert_that_element_doesnt_exist(self.COOKIE_WINDOW)
+    @allure.step('Click reject cookies')
+    def click_reject_cookies(self):
+        self.click(self.BUTTON_REJECT_COOKIES)
+        self.click(self.BUTTON_REJECT_COOKIES_SECOND)
 
+    @allure.step('Click agree cookies')
     def click_agree_cookies(self):
-        self.wait_for(self.COOKIE_WINDOW)
         self.click(self.BUTTON_AGREE_COOKIES)
 
-    def close_dropdown_window_about_sales(self):
-        self.wait_for(self.DROPDOWN_WINDOW)
-        self.assertions.assert_that_element_is_visible(self.DROPDOWN_WINDOW)
-        self.assertions.assert_that_element_is_visible(self.BUTTON_CLOSE_DROPDOWN_WINDOW)
-        self.assertions.assert_that_element_is_clickable(self.BUTTON_CLOSE_DROPDOWN_WINDOW)
-        self.click(self.BUTTON_CLOSE_DROPDOWN_WINDOW)
-        self.wait_until_element_disappear(self.DROPDOWN_WINDOW)
-        self.assertions.assert_that_element_doesnt_exist(self.DROPDOWN_WINDOW)
+    @allure.step('Open page and reject cookies')
+    def open_page_and_reject_cookies(self):
+        self.open()
+        self.click_reject_cookies()
 
+    @allure.step('Assert that cookies doesnt exist')
+    def assert_that_cookies_doesnt_exist(self):
+        self.wait_until_element_disappear(self.COOKIE_WINDOW)
+        self.assertions.assert_that_element_doesnt_exist(
+            self.COOKIE_WINDOW
+        )
+
+    @allure.step('Close dropdown window about sales')
+    def close_dropdown_window_about_sales(self):
+        self.click(self.BUTTON_CLOSE_DROPDOWN_WINDOW)
+
+    @allure.step('Assert that dropdown window about sales is closed')
+    def assert_that_dropdown_window_about_sales_is_closed(self):
+        self.wait_until_element_disappear(self.DROPDOWN_WINDOW)
+        self.assertions.assert_that_element_doesnt_exist(
+            self.DROPDOWN_WINDOW
+        )
+
+    @allure.step('Assert that banner is displayed')
     def assert_that_banner_is_displayed(self):
         self.assertions.assert_that_element_is_visible(self.BANNER)
 
+    @allure.step('Assert that logo is displayed')
     def assert_that_logo_is_displayed(self):
         self.assertions.assert_that_element_is_visible(self.LOGO)
 
-    def contact_center_opening_hours(self):
-        self.assertions.assert_that_element_is_visible(self.CONTACT_CENTER_OPENING_HOURS)
+    @allure.step('Assert contact center opening hours are displayed')
+    def assert_contact_center_opening_hours_are_displayed(self):
+        self.assertions.assert_that_element_is_visible(
+            self.CONTACT_CENTER_OPENING_HOURS
+        )
 
-    def choose_the_first_product_and_add_to_basket(self):
-        self.assertions.assert_that_element_is_visible(self.FIRST_PRODUCT)
-        self.assertions.assert_that_element_is_clickable(self.BUTTON_FIRST_PRODUCT_ADD_TO_BASKET)
-        self.click(self.BUTTON_FIRST_PRODUCT_ADD_TO_BASKET)
-        time.sleep(2)
-        self.assertions.assert_that_text_is_the_same(self.BUTTON_FIRST_PRODUCT_ADD_TO_BASKET, 'В корзине')
+    @allure.step('Add to basket by index')
+    def add_to_basket_by_index(self, i):
+        time.sleep(1)
+        self.get_element_by_index(self.BUTTON_ADD_TO_BASKET, i).click()
 
-    def bonus_program_button_is_working(self):
-        self.assertions.assert_that_element_is_visible(self.BUTTON_BONUS_PROGRAM)
+    @allure.step('Add product to favorites by index')
+    def add_product_to_favorites_by_index(self, i):
+        product = self.get_element_by_index(self.BUTTON_ADD_PRODUCT_TO_FAVORITES, i)
+        product.click()
+
+    @allure.step('Return text produduct by index')
+    def get_text_produduct_by_index(self, i):
+        product = self.get_element_by_index(self.BUTTON_ADD_TO_BASKET_PRODUCT_TEXT, i)
+        return product.text
+
+    @allure.step('Assert that product button has text in basket by index')
+    def assert_that_product_button_has_text_in_basket_by_index(self, i):
+        product = self.get_element_by_index(self.BUTTON_ADD_TO_BASKET, i)
+        time.sleep(1)
+        assert product.text == 'В корзине'
+
+    @allure.step('Click bonus program')
+    def click_bonus_program(self):
         self.click(self.BUTTON_BONUS_PROGRAM)
-        self.assertions.assert_that_element_is_visible(self.BANNER_BONUS_PROGRAM)
 
-    def search_field_is_working(self):
-        self.assertions.assert_that_element_is_visible(self.SEARCH_FIELD)
+    @allure.step('Assert that bonus program baner is exist')
+    def assert_that_bonus_program_baner_is_exist(self):
+        self.assertions.assert_that_element_is_visible(
+            self.BANNER_BONUS_PROGRAM
+        )
+
+    @allure.step('Click search headphones')
+    def click_search_headphones(self):
         self.fill(self.SEARCH_FIELD, 'наушники')
         self.click_enter(self.SEARCH_FIELD)
-        time.sleep(5)
-        self.assertions.assert_that_element_is_visible(self.SEARCH_RESULT)
 
-    def button_payment_in_parts_is_working(self):
+    @allure.step('Assert that headphones are exist')
+    def assert_that_headphones_are_exist(self):
+        self.assertions.assert_that_element_is_visible(
+            self.SEARCH_RESULT
+        )
+
+    @allure.step('Click partly pay')
+    def click_partly_pay(self):
         self.click(self.BUTTON_PAYMENT_IN_PARTS)
-        self.scroll_to_element(self.MONTHLY_PAYMENT)
-        self.assertions.assert_that_element_is_visible(self.MONTHLY_PAYMENT)
 
-    def change_city(self):
-        self.assertions.assert_that_element_is_visible(self.CITY)
+    @allure.step('Assert partly payment banner is exist')
+    def assert_partly_payment_banner_is_exist(self):
+        self.assertions.assert_that_text_is_the_same(
+            self.PAYMENT_IN_PARTS_BANNER,
+            'Покупайте больше сейчас – платите частями'
+        )
+
+    @allure.step('Change city')
+    def change_city(self, city):
         self.click(self.BUTTON_CHANGE_THE_CITY)
-        time.sleep(5)
+        time.sleep(1)
         self.click(self.BUTTON_CLEAR_FIELD_WITH_LOCATION)
+        self.fill(self.FIELD_WITH_LOCATION, city)
         time.sleep(2)
-        self.fill(self.FIELD_WITH_LOCATION, 'г. Брест')
-        time.sleep(5)
         self.click_enter(self.FIELD_WITH_LOCATION)
         self.click(self.BUTTON_SAVE_NEW_CITY)
-        time.sleep(2)
-        self.assertions.assert_that_text_is_the_same(self.CITY, 'г. Брест')
 
-    def favorites_is_empty(self):
-        self.click(self.BUTTON_FAVORITES_EMPTY)
-        self.assertions.assert_that_element_doesnt_exist(self.BUTTON_DELETE_FROM_FAVORITES)
+    @allure.step('Assert city on main page')
+    def assert_city_on_main_page(self, city):
+        self.assertions.assert_that_text_is_the_same(self.CITY, city)
 
-    def favorites_is_not_empty(self):
-        self.click(self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
-        self.click(self.BUTTON_FAVORITES)
-        self.assertions.assert_that_element_is_visible(self.BUTTON_DELETE_FROM_FAVORITES)
-
-    def basket_is_empty(self):
-        self.click(self.BUTTON_BASKET_ON_MAIN_PAGE)
-        self.assertions.assert_that_element_is_visible(self.INFORMATION_THAT_BASKET_IS_EMPTY)
-
-    def basket_is_not_empty(self):
-        self.click(self.BUTTON_FIRST_PRODUCT_ADD_TO_BASKET)
-        self.click(self.BUTTON_BASKET_ON_MAIN_PAGE)
-        time.sleep(2)
-        self.assertions.assert_that_element_doesnt_exist(self.INFORMATION_THAT_BASKET_IS_EMPTY)
-
-    def favorites_are_working(self):
-        recommendation = self.get_element(self.REC)
-        first_el = recommendation.find_element(*self.FIRST_FIELD_OF_REC)
-        first_el_text_el = first_el.find_element(*self.FIRST_FIELD_OF_REC_TEXT)
-        first_el_text = self.get_inner_text(first_el_text_el)
-        first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
-        first_el_button_favorites.click()
-        self.click(self.BUTTON_FAVORITES)
-        fav_first_el = self.get_element(self.FAVORITES_FIRST_EL)
-        fav_first_el_text = fav_first_el.find_element(*self.FAVORITES_FIRST_EL_TEXT).text
-        assert first_el_text == fav_first_el_text
-
-    def delete_from_favorites(self):
-        recommendation = self.get_element(self.REC)
-        first_el = recommendation.find_element(*self.FIRST_FIELD_OF_REC)
-        first_el_button_favorites = first_el.find_element(*self.BUTTON_FIRST_PRODUCT_ADD_TO_FAVORITES)
-        first_el_button_favorites.click()
-        self.click(self.BUTTON_FAVORITES)
-        self.wait_for(self.BUTTON_DELETE_FROM_FAVORITES)
-        self.click(self.BUTTON_DELETE_FROM_FAVORITES)
-        self.assertions.assert_that_element_doesnt_exist(self.FAVORITES_FIRST_EL)
-
-    def check_sale_filter(self):
+    @allure.step('Click all promotions')
+    def click_all_promotions(self):
         self.click(self.ALL_PROMOTIONS)
-        self.click(self.SALE_50)
-        time.sleep(2)
+
+    @allure.step('Set filter value')
+    def set_filter_value(self, sale_value):
+        self.SALE_FILTER_VALUE = (By.XPATH, f'//span[text()="от {sale_value}%"]')
+
+    @allure.step('Click apply sale filter')
+    def click_apply_sale_filter(self):
+        self.click(self.SALE_FILTER_VALUE)
+        time.sleep(1)
+
+    @allure.step('Assert sale vale of first product in filtered products')
+    def assert_sale_vale_of_first_product_in_filtered_products(self, sale_value):
         sale = self.get_text(self.SALE_FIRST_GOOD)
-        assert float(sale[1:-1]) >= 50
+        assert float(sale[1:-1]) >= sale_value
 
-    def assert_show_more_button(self):
-        count_popular_els_old = len(self.driver.find_elements(*self.POPULAR_ELEMENT))
+    @allure.step('Return count popular elements')
+    def get_count_popular_elements(self):
+        return len(self.driver.find_elements(*self.POPULAR_ELEMENT))
+
+    @allure.step('Click show more popular elements')
+    def click_show_more_popular_elements(self):
         self.click(self.BUTTON_SHOW_MORE)
-        count_popular_els_new = len(self.driver.find_elements(*self.POPULAR_ELEMENT))
-        assert count_popular_els_old < count_popular_els_new
 
-    def check_popular_filter_cheap(self):
+    @allure.step('Click less than on popular products')
+    def click_less_than_on_popular_products(self):
         self.click(self.BUTTON_CHEAPER_THAN_HUNDRED)
-        time.sleep(2)
+
+    @allure.step('Assert first froduct of populars is filtered')
+    def assert_first_froduct_of_populars_is_filtered(self):
+        time.sleep(1)
         first_el = self.get_element(self.POPULAR_ELEMENT)
         first_el_price = first_el.find_element(*self.ELEMENT_PRICE).text
         assert float(first_el_price.replace(',', '.')[:-3]) <= 100
 
-    def check_write_to_us_button(self):
-        self.wait_for(self.WRITE_TO_US)
+    @allure.step('Click write to us')
+    def click_write_to_us(self):
         self.click(self.WRITE_TO_US)
-        self.wait_for(self.FEEDBACK_WINDOW)
+
+    @allure.step('Assert feedback window is exist')
+    def assert_feedback_window_is_exist(self):
         self.assertions.assert_that_text_is_the_same(self.FEEDBACK_WINDOW, 'Обратная связь')
 
-    def check_subscription_form_empty(self):
-        self.wait_for(self.INPUT_EMAIL)
+    @allure.step('Click input email in subscription form')
+    def click_input_email_in_subscription_form(self):
         self.click(self.BUTTON_INPUT_EMAIL)
+
+    @allure.step('Assert that email is not specified in subscription form')
+    def assert_that_email_is_not_specified_in_subscription_form(self):
         self.assertions.assert_that_text_is_the_same(self.INPUT_ERROR_MESSAGE, 'Электронная почта не указана')
 
-    def check_subscription_form_incorrect_email(self):
-        self.wait_for(self.INPUT_EMAIL)
-        self.fill(self.INPUT_EMAIL, '1111')
-        self.click(self.BUTTON_INPUT_EMAIL)
+    @allure.step('Set email in subscription form')
+    def set_email_in_subscription_form(self, email):
+        self.fill(self.INPUT_EMAIL, email)
+
+    @allure.step('Assert incorrect format email in subscription form')
+    def assert_incorrect_format_email_in_subscription_form(self):
         self.assertions.assert_that_text_is_the_same(self.INPUT_ERROR_MESSAGE, 'Неправильный формат электронной почты')
 
-    def check_subscription_form_work_correct(self):
-        self.wait_for(self.INPUT_EMAIL)
-        self.fill(self.INPUT_EMAIL, 'example@example.com')
-        self.click(self.BUTTON_INPUT_EMAIL)
-        time.sleep(2)
+    @allure.step('Assert that open account page')
+    def assert_that_open_account_page(self):
         if self.check_element_is_exist(self.LOGIN_TO_ACCOUNT):
             self.assertions.assert_that_text_is_the_same(self.LOGIN_TO_ACCOUNT, 'Вход')
         else:
             self.assertions.assert_that_text_is_the_same(self.LOGIN_TO_ACCOUNT2, 'Вход')
 
+    @allure.step('Click up button')
+    def click_up_button(self):
+        self.click(self.BUTTON_UP)
+
+    @allure.step('Assert that now is window top')
+    def assert_that_now_is_window_top(self):
+        assert self.get_window_position() == 0
+
+    @allure.step('Check button up')
     def check_button_up(self):
         self.scroll_to_bottom()
         self.click(self.BUTTON_UP)

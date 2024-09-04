@@ -12,3 +12,5 @@ helpers/.DS_Store
 locators/.DS_Store
 pages/.DS_Store
 tests/.DS_Store
+
+allure-results
