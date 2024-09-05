@@ -17,7 +17,6 @@ class FavoritesPage(BasePage, FavoritesPageLocators):
 
     @allure.step('Assert that favorites is empty')
     def assert_that_favorites_is_empty(self):
-        text = self.get_text(self.FAVORITES_ARE_EMPTY)
         self.assertions.assert_that_text_is_the_same(self.FAVORITES_ARE_EMPTY,
                                                      'Избранные товары\nНет избранных товаров')
 
