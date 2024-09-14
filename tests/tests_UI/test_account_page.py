@@ -3,7 +3,7 @@ from pages.main_page import MainPage
 import allure
 
 
-@allure.title('Test incorrect email')
+@allure.title('Incorrect email message')
 def test_incorrect_email(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -17,7 +17,7 @@ def test_incorrect_email(driver):
     account_page.assert_incorrect_email_message()
 
 
-@allure.title('Test incorrect password')
+@allure.title('Incorrect password message')
 def test_incorrect_password(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -31,7 +31,7 @@ def test_incorrect_password(driver):
     account_page.assert_incorrect_password_message()
 
 
-@allure.title('Test field email is empty')
+@allure.title('Field email is empty message')
 def test_field_email_is_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -44,7 +44,7 @@ def test_field_email_is_empty(driver):
     account_page.assert_empty_email_message()
 
 
-@allure.title('Test field passw is empty')
+@allure.title('Field passw is empty message')
 def test_field_passw_is_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -57,7 +57,7 @@ def test_field_passw_is_empty(driver):
     account_page.assert_empty_password_message()
 
 
-@allure.title('Test forgot password')
+@allure.title('Button reset message')
 def test_forgot_password(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -71,7 +71,7 @@ def test_forgot_password(driver):
     account_page.assert_success_reset_message()
 
 
-@allure.title('Test reset password')
+@allure.title('Reset password form is exist')
 def test_reset_password(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -86,7 +86,7 @@ def test_reset_password(driver):
     account_page.assert_reset_passwort_form_is_exist()
 
 
-@allure.title('Test registration that incorrect email')
+@allure.title('Incorrect email registration')
 def test_registration_that_incorrect_email(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -101,7 +101,7 @@ def test_registration_that_incorrect_email(driver):
     account_page.assert_email_is_incorrect_in_registration()
 
 
-@allure.title('Test registration that user is already exist')
+@allure.title('User is already exist')
 def test_registration_that_user_is_already_exist(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()

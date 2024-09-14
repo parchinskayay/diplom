@@ -5,7 +5,7 @@ import pytest
 import allure
 
 
-@allure.title('Test basket is empty')
+@allure.title('Basket is empty')
 def test_basket_is_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -16,7 +16,7 @@ def test_basket_is_empty(driver):
     basket_page.assert_that_basket_is_empty()
 
 
-@allure.title('Test basket is not empty')
+@allure.title('Basket is not empty')
 def test_basket_is_not_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -28,7 +28,7 @@ def test_basket_is_not_empty(driver):
     basket_page.assert_that_basket_is_not_empty()
 
 
-@allure.title('Test assert that button make an order is working')
+@allure.title('Button make an order')
 def test_assert_that_button_make_an_order_is_working(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -42,7 +42,7 @@ def test_assert_that_button_make_an_order_is_working(driver):
 
 
 @pytest.mark.parametrize("promocode", ['1111', '2222', '3333'])
-@allure.title('Test assert that the promo code is invalid')
+@allure.title('Invalid promocode')
 def test_assert_that_the_promo_code_is_invalid(driver, promocode):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -56,7 +56,7 @@ def test_assert_that_the_promo_code_is_invalid(driver, promocode):
     basket_page.assert_that_promocode_is_incorrect()
 
 
-@allure.title('Test assert that promotional product is visible')
+@allure.title('Promotional product is visible')
 def test_assert_that_promotional_product_is_visible(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -69,7 +69,7 @@ def test_assert_that_promotional_product_is_visible(driver):
     basket_page.assert_that_promo_product_is_exist()
 
 
-@allure.title('Test assert cancel participation in promo game')
+@allure.title('Cancel participation in promo game')
 def test_assert_cancel_participation_in_promo_game(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -84,7 +84,7 @@ def test_assert_cancel_participation_in_promo_game(driver):
 
 
 @pytest.mark.parametrize("index", range(3))
-@allure.title('Test add product in basket and compare names')
+@allure.title('The right product in the basket')
 def test_add_product_in_basket_and_compare_names(driver, index):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -100,7 +100,7 @@ def test_add_product_in_basket_and_compare_names(driver, index):
 
 
 @pytest.mark.parametrize("n", [2, 4, 5])
-@allure.title('Test add some products in basket and compare names')
+@allure.title('The right products in the basket')
 def test_add_some_products_in_basket_and_compare_names(driver, n):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -119,7 +119,7 @@ def test_add_some_products_in_basket_and_compare_names(driver, n):
     assert products_main_page_text == products_basket_text
 
 
-@allure.title('Test add two products in basket and delete two from basket')
+@allure.title('Delete all products from basket')
 def test_add_two_products_in_basket_and_delete_two_from_basket(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -134,7 +134,7 @@ def test_add_two_products_in_basket_and_delete_two_from_basket(driver):
     basket_page.assert_that_basket_is_empty()
 
 
-@allure.title('Test add two products in basket and delete one from basket')
+@allure.title('Delete not all products from basket')
 def test_add_two_products_in_basket_and_delete_one_from_basket(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()

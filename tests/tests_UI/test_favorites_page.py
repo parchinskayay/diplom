@@ -5,7 +5,7 @@ import pytest
 import allure
 
 
-@allure.title('Test favorites are empty')
+@allure.title('Favorites are empty')
 def test_favorites_are_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -16,7 +16,7 @@ def test_favorites_are_empty(driver):
     favorites_page.assert_that_favorites_is_empty()
 
 
-@allure.title('Test favorites are not empty')
+@allure.title('Favorites are not empty')
 def test_favorites_are_not_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -29,7 +29,7 @@ def test_favorites_are_not_empty(driver):
 
 
 @pytest.mark.parametrize("index", range(3))
-@allure.title('Test assert text added to favorites product')
+@allure.title('The right product in the favorites')
 def test_assert_text_added_to_favorites_product(driver, index):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -45,7 +45,7 @@ def test_assert_text_added_to_favorites_product(driver, index):
 
 
 @pytest.mark.parametrize("n", [2, 3, 5])
-@allure.title('Test add some products to favorites and compare names')
+@allure.title('Add some products to favorites')
 def test_add_some_products_to_favorites_and_compare_names(driver, n):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -68,7 +68,7 @@ def test_add_some_products_to_favorites_and_compare_names(driver, n):
     assert products_main_page_text == products_favorites_text
 
 
-@allure.title('Test add to favorites and delete from favorites')
+@allure.title('Delete from favorites')
 def test_add_to_favorites_and_delete_from_favorites(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -81,7 +81,7 @@ def test_add_to_favorites_and_delete_from_favorites(driver):
     favorites_page.assert_that_favorites_is_empty()
 
 
-@allure.title('Test add to favorites and delete from favorites two products')
+@allure.title('Delete all products from favorites')
 def test_add_to_favorites_and_delete_from_favorites_two_products(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -96,7 +96,7 @@ def test_add_to_favorites_and_delete_from_favorites_two_products(driver):
     favorites_page.assert_that_favorites_is_empty()
 
 
-@allure.title('Test add to favorites two products and delete from favorites one product')
+@allure.title('Delete not all products from favorites')
 def test_add_to_favorites_two_products_and_delete_from_favorites_one_product(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()

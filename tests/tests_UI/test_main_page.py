@@ -3,7 +3,7 @@ import pytest
 import allure
 
 
-@allure.title('Test that cookies is rejected and closed')
+@allure.title('Reject cookies')
 def test_that_cookies_is_rejected_and_closed(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -11,7 +11,7 @@ def test_that_cookies_is_rejected_and_closed(driver):
     main_page.assert_that_cookies_doesnt_exist()
 
 
-@allure.title('Test that cookies is accepted and closed')
+@allure.title('Accept cookies')
 def test_that_cookies_is_accepted_and_closed(driver):
     main_page = MainPage(driver)
     main_page.open()
@@ -20,7 +20,7 @@ def test_that_cookies_is_accepted_and_closed(driver):
     main_page.assert_that_cookies_doesnt_exist()
 
 
-@allure.title('Test that dropdown window about sales is closed')
+@allure.title('Close dropdown window')
 def test_that_dropdown_window_about_sales_is_closed(driver):
     main_page = MainPage(driver)
     main_page.open()
@@ -30,7 +30,7 @@ def test_that_dropdown_window_about_sales_is_closed(driver):
     main_page.assert_that_dropdown_window_about_sales_is_closed()
 
 
-@allure.title('Test that banner is displayed')
+@allure.title('Main banner exist')
 def test_that_banner_is_displayed(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -38,7 +38,7 @@ def test_that_banner_is_displayed(driver):
     main_page.assert_that_banner_is_displayed()
 
 
-@allure.title('Test that logo is displayed')
+@allure.title('Logo exist')
 def test_that_logo_is_displayed(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -46,7 +46,7 @@ def test_that_logo_is_displayed(driver):
     main_page.assert_that_logo_is_displayed()
 
 
-@allure.title('Test contact center opening hours are displayed')
+@allure.title('Contact center opening hours exist')
 def test_contact_center_opening_hours_are_displayed(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -54,7 +54,7 @@ def test_contact_center_opening_hours_are_displayed(driver):
     main_page.assert_contact_center_opening_hours_are_displayed()
 
 
-@allure.title('Test that first element button has text in basket')
+@allure.title('The "add to cart" button has the text')
 def test_that_first_element_button_has_text_in_basket(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -63,7 +63,7 @@ def test_that_first_element_button_has_text_in_basket(driver):
     main_page.assert_that_product_button_has_text_in_basket_by_index(0)
 
 
-@allure.title('Test click bonus program')
+@allure.title('Bonus program exist')
 def test_click_bonus_program(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -72,7 +72,7 @@ def test_click_bonus_program(driver):
     main_page.assert_that_bonus_program_baner_is_exist()
 
 
-@allure.title('Test click partly pay')
+@allure.title('Partly pay exist')
 def test_click_partly_pay(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -81,7 +81,7 @@ def test_click_partly_pay(driver):
     main_page.assert_partly_payment_banner_is_exist()
 
 
-@allure.title('Test search field is working')
+@allure.title('Search field is working')
 def test_search_field_is_working(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -91,7 +91,7 @@ def test_search_field_is_working(driver):
 
 
 @pytest.mark.parametrize("city", ["г. Брест", "г. Гомель", "г. Витебск"])
-@allure.title(f'Test change city')
+@allure.title('Change city')
 def test_change_city(driver, city):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -101,7 +101,7 @@ def test_change_city(driver, city):
 
 
 @pytest.mark.parametrize("sale_value", [50, 40, 30, 20, 10])
-@allure.title('Test check sale filter')
+@allure.title('Check sale filter')
 def test_check_sale_filter(driver, sale_value):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -112,7 +112,7 @@ def test_check_sale_filter(driver, sale_value):
     main_page.assert_sale_vale_of_first_product_in_filtered_products(sale_value)
 
 
-@allure.title('Test assert show more button')
+@allure.title('Button show more')
 def test_assert_show_more_button(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -123,7 +123,7 @@ def test_assert_show_more_button(driver):
     assert count_popular_els_old < count_popular_els_new
 
 
-@allure.title('Test check popular filter cheap')
+@allure.title('Popular filter cheap')
 def test_check_popular_filter_cheap(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -132,7 +132,7 @@ def test_check_popular_filter_cheap(driver):
     main_page.assert_first_froduct_of_populars_is_filtered()
 
 
-@allure.title('Test check write to us button')
+@allure.title('Button write us')
 def test_check_write_to_us_button(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -141,7 +141,7 @@ def test_check_write_to_us_button(driver):
     main_page.assert_feedback_window_is_exist()
 
 
-@allure.title('Test check subscription form empty')
+@allure.title('Subscription form is empty')
 def test_check_subscription_form_empty(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -150,7 +150,7 @@ def test_check_subscription_form_empty(driver):
     main_page.assert_that_email_is_not_specified_in_subscription_form()
 
 
-@allure.title('Test check subscription form incorrect email')
+@allure.title('Subscription form with incorrect email')
 def test_check_subscription_form_incorrect_email(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -160,7 +160,7 @@ def test_check_subscription_form_incorrect_email(driver):
     main_page.assert_incorrect_format_email_in_subscription_form()
 
 
-@allure.title('Test check subscription form work correct')
+@allure.title('Subscription form work with correct email')
 def test_check_subscription_form_work_correct(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()
@@ -170,7 +170,7 @@ def test_check_subscription_form_work_correct(driver):
     main_page.assert_that_open_account_page()
 
 
-@allure.title('Test check button up')
+@allure.title('Button up')
 def test_check_button_up(driver):
     main_page = MainPage(driver)
     main_page.open_page_and_reject_cookies()

@@ -72,8 +72,8 @@ class MainPage(BasePage, MainPageLocators):
         product = self.get_element_by_index(self.BUTTON_ADD_PRODUCT_TO_FAVORITES, i)
         product.click()
 
-    @allure.step('Return text produduct by index')
-    def get_text_produduct_by_index(self, i):
+    @allure.step('Return text product by index')
+    def get_text_product_by_index(self, i):
         product = self.get_element_by_index(self.BUTTON_ADD_TO_BASKET_PRODUCT_TEXT, i)
         return product.text
 
